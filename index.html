@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<meta charset="utf-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Trabajo Libre 06 </title>
+	 <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	
+	<style type="text/css">
+
+		#app{
+		  background-color:#cecece;
+		  border:4px solid plum;
+		  border-radius: 5px;
+		  padding-top: 10px;
+		}
+		.teclado{
+			margin-top:5px;
+			margin-left:4px;
+			width: 35px;
+			display: inline-grid;
+			border:2px solid purple;
+			border-radius: 100px;	
+			background-color: #ebf5fb ;
+			text-align: center;
+			cursor: pointer;
+		}
+		.linea{
+			margin-left:10px;
+		}
+		ul#horizontal-list li {
+		  display:inline;
+		}
+		ul#horizontal-list button{
+			margin-left: 10px;
+			width: 40px;
+		}
+		
+		.cuadro{
+		  width: 30px;		  
+		  margin-left: 6px;		 		  		  		  
+		  text-align: center;
+		  padding-left:3px;
+		  font-size: 1em;
+		  border-bottom: double;
+		}
+		.rojo{
+			background-color:red;
+		}
+		.verde{
+			background-color: green;
+		}
+	</style>
+	
+</head>
+
+<body>
+	
+	<div id="app" class="container-fluid ">
+
+		<div v-if="win" class="text-center">
+			<img  src="imagenes/win.gif" />
+			<p>Presiona "nuevo juego" para jugar otra vez</p>
+		</div>
+		<div v-if="lost" class="text-center" >
+			<img  src="imagenes/lose.gif" />
+			<p>Presiona "nuevo juego" para jugar otra vez</p>
+		</div>
+
+	<div class="row">
+
+		<div class="col-sm-12">
+
+			<h3 class="text-center text-info">JUEGO DE AHORCADO</h3>
+		
+			<ul id="horizontal-list centrado">
+
+				<button v-for="item in palabra_escrita" type="button" class="btn btn-primary cuadro text-center col-xs-12 col-sm-12 col-md-12"><span class="badge">{{item}}</span>
+				</button> 							
+				<button></button>
+
+			</ul>		
+
+			</div>
+
+			<div class="container text-center">
+
+			<div class="col-sm-12 center">
+
+				<span v-for="(letra,index) in letras">
+				
+				<button v-on:click="comparar(letra,index)" class="teclado" v-bind:key="index" v-bind:disabled="botones[index]" v-bind:class="{verde:color_botones[index]=='verde',rojo:color_botones[index]=='rojo'}">{{letra}}</button>
+				</span>
+							
+			</div>
+
+			</div>
+
+		</div>	
+
+	<div class="row">
+
+		<div class="col-xs-8 col-sm-8 col-md-8">
+			<br>
+			<div>
+				<img v-bind:src="'imagenes/'+contador_errores+'.png'" alt="">
+			</div>
+
+		</div>
+
+		<div class="col-xs-4 col-sm-4 col-md-4">
+			<br>
+			<label class="text-primary">Aciertos:</label>
+			<input type="text" class="form-control text-center" v-model="contador_aciertos" >
+			<br>
+			<label class="text-primary">Errores:</label>
+			<input type="text" class="form-control text-center" v-model="contador_errores" size="3">
+			<br>
+			<button class="btn btn-primary" @click="generarAleatorio">NUEVO JUEGO</button>
+		</div>	
+									
+	</div>	
+
+</div>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script type="text/javascript" src="logica.js"></script>
+
+</body>
+</html>
+
+
+
